@@ -77,54 +77,54 @@ android {
             buildConfigField "boolean", "aaa", "true"
             buildConfigField "int", "TYPE_MOUDLE", "1"
         }
-        //qa测试版本发布
-        qf_jianshe {
-
-            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
-            buildConfigField "boolean", "IS_QA_ENV", "true"
-            buildConfigField "boolean", "aaa", "true"
-            buildConfigField "int", "TYPE_MOUDLE", "2"
-            manifestPlaceholders = [
-                    ORDER_PUSH_APP_TYPE  : "123456",
-                    ORDER_PUSH_SECRET_KEY: "123456"
-            ]
-        }
-        //线上测试版本
-        qf_pufa {
-//            rootProject.ext.dependencieid = 3
-//            dependencies {
-//                compile fileTree(dir: 'libs', include: ['*.jar'])
-//                compile project(':modulecore:moduleShop')
-//            }
-            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "true"
-            buildConfigField "boolean", "IS_QA_ENV", "false"
-            buildConfigField "boolean", "aaa", "true"
-            buildConfigField "int", "TYPE_MOUDLE", "3"
-        }
-        //市场版本发布,release
-        qf_nonghang {
-            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
-            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
-            buildConfigField "boolean", "IS_QA_ENV", "false"
-            buildConfigField "boolean", "aaa", "true"
-            buildConfigField "int", "TYPE_MOUDLE", "4"
-        }
-        //市场版本发布,release
-        qf_nonghang_xiaomi {
-            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
-            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
-            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
-            buildConfigField "boolean", "IS_QA_ENV", "false"
-            buildConfigField "boolean", "aaa", "true"
-            buildConfigField "int", "TYPE_MOUDLE", "4"
-
-            manifestPlaceholders = [channel: "xiaomi"]
-        }
+//        //qa测试版本发布
+//        qf_jianshe {
+//
+//            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+//            buildConfigField "boolean", "IS_QA_ENV", "true"
+//            buildConfigField "boolean", "aaa", "true"
+//            buildConfigField "int", "TYPE_MOUDLE", "2"
+//            manifestPlaceholders = [
+//                    ORDER_PUSH_APP_TYPE  : "123456",
+//                    ORDER_PUSH_SECRET_KEY: "123456"
+//            ]
+//        }
+//        //线上测试版本
+//        qf_pufa {
+////            rootProject.ext.dependencieid = 3
+////            dependencies {
+////                compile fileTree(dir: 'libs', include: ['*.jar'])
+////                compile project(':modulecore:moduleShop')
+////            }
+//            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "true"
+//            buildConfigField "boolean", "IS_QA_ENV", "false"
+//            buildConfigField "boolean", "aaa", "true"
+//            buildConfigField "int", "TYPE_MOUDLE", "3"
+//        }
+//        //市场版本发布,release
+//        qf_nonghang {
+//            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
+//            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+//            buildConfigField "boolean", "IS_QA_ENV", "false"
+//            buildConfigField "boolean", "aaa", "true"
+//            buildConfigField "int", "TYPE_MOUDLE", "4"
+//        }
+//        //市场版本发布,release
+//        qf_nonghang_xiaomi {
+//            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+//            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
+//            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+//            buildConfigField "boolean", "IS_QA_ENV", "false"
+//            buildConfigField "boolean", "aaa", "true"
+//            buildConfigField "int", "TYPE_MOUDLE", "4"
+//
+//            manifestPlaceholders = [channel: "xiaomi"]
+//        }
     }
 }
 
@@ -158,22 +158,22 @@ dependencies {
 //    compile project(':modulecore:moduleLogin')
 //    compile project(':modulecore:moduleLogin')
 //    compile project(':modulecore:moduleShop')
-
-    if(rootProject.ext.isBuildApp){
-        compile project(':modulebase')
-    }else{
-        qf_zhaoshangCompile project(':modulebase')
-
-        qf_jiansheCompile project(':modulecore:moduleLogin')
-
-        qf_pufaCompile project(':modulecore:moduleShop')
-
-        qf_nonghangCompile project(':modulecore:moduleLogin')
-        qf_nonghangCompile project(':modulecore:moduleShop')
-
-        qf_nonghang_xiaomiCompile project(':modulecore:moduleLogin')
-        qf_nonghang_xiaomiCompile project(':modulecore:moduleShop')
-    }
+    qf_zhaoshangCompile project(':modulebase')
+//    if(rootProject.ext.isBuildApp){
+//        compile project(':modulebase')
+//    }else{
+//        qf_zhaoshangCompile project(':modulebase')
+//
+//        qf_jiansheCompile project(':modulecore:moduleLogin')
+//
+//        qf_pufaCompile project(':modulecore:moduleShop')
+//
+//        qf_nonghangCompile project(':modulecore:moduleLogin')
+//        qf_nonghangCompile project(':modulecore:moduleShop')
+//
+//        qf_nonghang_xiaomiCompile project(':modulecore:moduleLogin')
+//        qf_nonghang_xiaomiCompile project(':modulecore:moduleShop')
+//    }
 
 
 
