@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/bryan/Downloads/AndroidComponent-master/modulebase/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa3a8706ecc30426e3ebd35d9b8d18f04baeccd8">
+        <dex dex="/Users/bryan/Downloads/AndroidComponent-master/sample/build/intermediates/pre-dexed/qf_jianshe/debug/classes_f925335dbab42e0677949577c2ad51ca5be66180.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bryan/Downloads/AndroidComponent-master/modulecore/moduleShop/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="59b298dcdd6ed81bed3a6f642df4bb9177ba18b7">
+        <dex dex="/Users/bryan/Downloads/AndroidComponent-master/sample/build/intermediates/pre-dexed/qf_nonghang/debug/classes_3f292c8289161bc00862d7b3c00f7b533a39112f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bryan/Downloads/AndroidComponent-master/modulecore/moduleLogin/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f3480b747dd2596739abba0ab726ea692aae16a4">
+        <dex dex="/Users/bryan/Downloads/AndroidComponent-master/sample/build/intermediates/pre-dexed/qf_jianshe/debug/classes_c100919a1807bf9f7d5b29418f4f5ef8482bf968.jar" />
+    </item>
+
+</items>

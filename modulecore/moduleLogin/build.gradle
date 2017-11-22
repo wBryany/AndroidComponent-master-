@@ -1,0 +1,99 @@
+if(rootProject.ext.isBuildApp){
+    apply plugin: "com.android.application"
+
+}else{
+    apply plugin: 'com.android.library'
+
+}
+apply plugin: 'android-apt'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        if(rootProject.ext.isBuildApp){
+            applicationId "com.allure.login"
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName  rootProject.ext.android.versionName
+    }
+    signingConfigs {
+        debug {
+            storeFile file("../buildsystem/near_keystore.jks")
+            storePassword "qfpay.near"
+            keyAlias "release"
+            keyPassword "qfpay.near.release"
+            //禁用v2签名方式
+            v2SigningEnabled false
+        }
+        release {
+            storeFile file("../buildsystem/near_keystore.jks")
+            storePassword "qfpay.near"
+            keyAlias "release"
+            keyPassword "qfpay.near.release"
+            //禁用v2签名方式
+            v2SigningEnabled false
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false;
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+//
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+//                        def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+//        }
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true;
+            signingConfig signingConfigs.debug
+//            testCoverageEnabled true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.isBuildApp) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                //移除debug资源
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+    resourcePrefix "login_"
+    buildToolsVersion '25.0.2'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':modulebase')
+    compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'
+    apt 'com.github.mzule.activityrouter:compiler:1.1.7'
+
+}

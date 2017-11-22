@@ -1,0 +1,180 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.allure.sample"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../buildsystem/near_keystore.jks")
+            storePassword "qfpay.near"
+            keyAlias "release"
+            keyPassword "qfpay.near.release"
+            //禁用v2签名方式
+            v2SigningEnabled false
+        }
+        release {
+            storeFile file("../buildsystem/near_keystore.jks")
+            storePassword "qfpay.near"
+            keyAlias "release"
+            keyPassword "qfpay.near.release"
+            //禁用v2签名方式
+            v2SigningEnabled false
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false;
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+//
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+//                        def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+//        }
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true;
+            signingConfig signingConfigs.debug
+//            testCoverageEnabled true
+        }
+    }
+
+
+    productFlavors {
+        //预览版发布
+        qf_zhaoshang {
+//
+            buildConfigField "boolean", "IS_OFF_LINE_ENV", "true"
+            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+            buildConfigField "boolean", "IS_QA_ENV", "false"
+            buildConfigField "boolean", "aaa", "true"
+            buildConfigField "int", "TYPE_MOUDLE", "1"
+        }
+        //qa测试版本发布
+        qf_jianshe {
+
+            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+            buildConfigField "boolean", "IS_QA_ENV", "true"
+            buildConfigField "boolean", "aaa", "true"
+            buildConfigField "int", "TYPE_MOUDLE", "2"
+            manifestPlaceholders = [
+                    ORDER_PUSH_APP_TYPE  : "123456",
+                    ORDER_PUSH_SECRET_KEY: "123456"
+            ]
+        }
+        //线上测试版本
+        qf_pufa {
+//            rootProject.ext.dependencieid = 3
+//            dependencies {
+//                compile fileTree(dir: 'libs', include: ['*.jar'])
+//                compile project(':modulecore:moduleShop')
+//            }
+            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "true"
+            buildConfigField "boolean", "IS_QA_ENV", "false"
+            buildConfigField "boolean", "aaa", "true"
+            buildConfigField "int", "TYPE_MOUDLE", "3"
+        }
+        //市场版本发布,release
+        qf_nonghang {
+            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
+            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+            buildConfigField "boolean", "IS_QA_ENV", "false"
+            buildConfigField "boolean", "aaa", "true"
+            buildConfigField "int", "TYPE_MOUDLE", "4"
+        }
+        //市场版本发布,release
+        qf_nonghang_xiaomi {
+            buildConfigField "boolean", "IS_OFF_LINE_ENV", "false"
+            buildConfigField "boolean", "IS_ON_LINE_ENV", "true"
+            buildConfigField "boolean", "IS_ON_LINE_TEST_ENV", "false"
+            buildConfigField "boolean", "IS_QA_ENV", "false"
+            buildConfigField "boolean", "aaa", "true"
+            buildConfigField "int", "TYPE_MOUDLE", "4"
+
+            manifestPlaceholders = [channel: "xiaomi"]
+        }
+    }
+}
+
+dependencies {
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
+//    if (rootProject.ext.isBuildApp) {
+//        compile project(':modulebase')
+//    } else {
+//        compile project(':modulecore:moduleLogin')
+//        compile project(':modulecore:moduleShop')
+//    }
+
+//    logger.log(LogLevel.INFO,"dependencieid:"+rootProject.ext.dependencieid)
+
+//
+//        Properties properties = new Properties()
+//        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//    println "properties:" + properties.getProperty("dependencieid")
+//    if (properties.getProperty("dependencieid").equals("1")) {
+//        compile project(':modulebase')
+//    } else if (properties.getProperty("dependencieid") .equals("2")) {
+//        compile project(':modulecore:moduleLogin')
+//    } else if (properties.getProperty("dependencieid"). equals("3")) {
+//        compile project(':modulecore:moduleShop')
+//    } else {
+//        compile project(':modulecore:moduleLogin')
+//        compile project(':modulecore:moduleShop')
+//    }
+//    compile project(':modulebase')
+//    compile project(':modulecore:moduleLogin')
+//    compile project(':modulecore:moduleLogin')
+//    compile project(':modulecore:moduleShop')
+
+    if(rootProject.ext.isBuildApp){
+        compile project(':modulebase')
+    }else{
+        qf_zhaoshangCompile project(':modulebase')
+
+        qf_jiansheCompile project(':modulecore:moduleLogin')
+
+        qf_pufaCompile project(':modulecore:moduleShop')
+
+        qf_nonghangCompile project(':modulecore:moduleLogin')
+        qf_nonghangCompile project(':modulecore:moduleShop')
+
+        qf_nonghang_xiaomiCompile project(':modulecore:moduleLogin')
+        qf_nonghang_xiaomiCompile project(':modulecore:moduleShop')
+    }
+
+
+
+}
